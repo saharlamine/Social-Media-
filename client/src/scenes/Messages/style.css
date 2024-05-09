@@ -1,0 +1,158 @@
+/* Container for the messaging page */
+.messaging-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Left side containing the list of persons */
+.persons-list {
+  width: 30%;
+  border-right: 1px solid #ccc;
+  /* background-color: #f0f0f0; */
+  padding: 20px;
+}
+
+/* Right side containing the conversation messages */
+.conversation {
+  width: 70%;
+  padding: 20px;
+}
+
+/* Style for each person in the list */
+.persons-list li {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.list-unstyled {
+  list-style-type: none;
+}
+/* Style for the selected person in the list */
+.persons-list li.active {
+  /* background-color: #e0e0e0; */
+}
+
+/* Style for the conversation messages */
+.conversation ul {
+    list-style-type: none;
+    padding: 0;
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: auto;
+    scroll-behavior: smooth; /* Scroll behavior */
+    direction: rtl; /* Right-to-left direction */
+  }
+  
+  /* Ensure the conversation UL scrolls to the bottom */
+  .conversation ul::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+  }
+  
+  /* Ensure the conversation UL scrolls to the bottom */
+  .conversation ul li:last-child {
+    margin-bottom: 0; /* Remove margin for the last message */
+  }
+  
+
+/* Style for each message in the conversation */
+.conversation ul li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Style for sender's message */
+.conversation ul li.sender-message {
+  text-align: right;
+  background-color: #cce5ff;
+}
+
+/* Style for receiver's message */
+.conversation ul li.receiver-message {
+  text-align: left;
+  background-color: #f0f0f0;
+}
+
+/* Textarea for composing new message */
+textarea {
+  width: calc(100% - 70px);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Button for sending message */
+button {
+  padding: 10px 20px;
+  background-color: #66d4f6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Button disabled state */
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal container */
+.new-conversation-modal {
+     /* background-color: #fff; */
+    /* padding: 20px; */
+    border-radius: 8px;
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
+    max-width: 900px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Modal title */
+.new-conversation-modal h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Modal input */
+.new-conversation-modal input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Modal button */
+.new-conversation-modal button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Modal button hover effect */
+.new-conversation-modal button:hover {
+  background-color: #0056b3;
+}
