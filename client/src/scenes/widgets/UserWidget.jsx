@@ -21,9 +21,10 @@ const UserWidget = ({ userId, picturePath }) => {
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -125,13 +126,13 @@ const UserWidget = ({ userId, picturePath }) => {
             <img src="../assets/twitter.png" alt="twitter" />
             <Box>
               <Typography color={main} fontWeight="500">
-              <Link
+                <Link
                   href={twitter}
                   style={{ textDecoration: "none" }}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                Twitter
+                  Twitter
                 </Link>
               </Typography>
               <Typography color={medium}>Social Network</Typography>

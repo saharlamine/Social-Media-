@@ -17,6 +17,7 @@ const MessagingPage = () => {
   const [newConversationEmail, setNewConversationEmail] = useState("");
   const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const user = useSelector((state) => state.user);
   const currentUserEmail = user.email;
@@ -26,7 +27,7 @@ const MessagingPage = () => {
   const fetchMessages = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/messages/${currentUserEmail}`
+        `${API_BASE_URL}/api/messages/${currentUserEmail}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch messages");
@@ -52,7 +53,7 @@ const MessagingPage = () => {
       for (const receiverEmail of uniqueReceivers) {
         try {
           const userResponse = await fetch(
-            `http://localhost:3001/users/email/${receiverEmail}`
+            `${API_BASE_URL}/users/email/${receiverEmail}`
           );
           if (userResponse.ok) {
             const userData = await userResponse.json();
@@ -89,7 +90,7 @@ const MessagingPage = () => {
   const fetchConversation = async (receiver) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/messages/${currentUserEmail}/${receiver}`
+        `${API_BASE_URL}/api/messages/${currentUserEmail}/${receiver}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch conversation");
@@ -134,7 +135,7 @@ const MessagingPage = () => {
     e.preventDefault(); // Prevent default form submission
 
     try {
-      const response = await fetch("http://localhost:3001/api/messages", {
+      const response = await fetch(`${API_BASE_URL}/api/messages`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -163,7 +164,7 @@ const MessagingPage = () => {
       
       setSelectedReceiver(receiverEmail);
       const response = await fetch(
-        `http://localhost:3001/users/email/${receiverEmail}`
+        `${API_BASE_URL}/users/email/${receiverEmail}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch user data");
@@ -192,7 +193,7 @@ const MessagingPage = () => {
   };
   const handleDeleteMessage = async (mail) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/messages/supprimer/${mail}`, {
+      const response = await fetch(`${API_BASE_URL}/api/messages/supprimer/${mail}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

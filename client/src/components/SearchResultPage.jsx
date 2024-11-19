@@ -23,12 +23,13 @@ const SearchResultPage = () => {
   const [error, setError] = useState("");
   const [errorPost, setErrorPost] = useState("");
   const navigate = useNavigate();
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchDataUser = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/users/search/${query}`
+          `${API_BASE_URL}/users/search/${query}`
         );
         if (!response.ok) {
           throw new Error("User not found");
@@ -47,7 +48,7 @@ const SearchResultPage = () => {
     const fetchDataPost = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/posts/search/${query}`
+          `${API_BASE_URL}/posts/search/${query}`
         );
         if (!response.ok) {
           throw new Error("Post not found");
@@ -85,7 +86,7 @@ const SearchResultPage = () => {
           <Typography variant="body1" color="error">
             {error}
           </Typography>
-        ) : (searchResults.length === 0 && searchResultsPost.length ==0) ? (
+        ) : searchResults.length === 0 && searchResultsPost.length == 0 ? (
           <Typography variant="body1">No Data found</Typography>
         ) : (
           <div>
@@ -140,11 +141,13 @@ const SearchResultPage = () => {
           <Typography variant="body1" color="error">
             {error}
           </Typography>
-        ) :
-         (
+        ) : (
           <div>
-              {searchResultsPost.map((post) => (
-              <div key={post._id} style={{ width: "50%", marginBottom: "20px" }}>
+            {searchResultsPost.map((post) => (
+              <div
+                key={post._id}
+                style={{ width: "50%", marginBottom: "20px" }}
+              >
                 <PostWidget
                   postId={post._id}
                   postUserId={post.userId}

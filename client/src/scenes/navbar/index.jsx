@@ -58,7 +58,7 @@ const Navbar = () => {
   const handleMsg = () => {
     navigate(`/messages`);
   };
-  const url = "http://localhost:3001";
+  const url =  process.env.REACT_APP_API_BASE_URL;
 
   const getUser = async (id) => {
     const res = await fetch(`${url}/users/${id}`, {
@@ -107,30 +107,29 @@ const Navbar = () => {
     setAnchorEl(event.currentTarget);
   };
   // Function to handle closing the popover
-const handlePopoverClose = async () => {
-  await deleteNotification(); // Wait for the delete operation to complete
-  setAnchorEl(null); // Close the popover after deletion
-};
+  const handlePopoverClose = async () => {
+    await deleteNotification(); // Wait for the delete operation to complete
+    setAnchorEl(null); // Close the popover after deletion
+  };
 
-const deleteNotification = async () => {
-  try {
-    const response = await fetch(
-      `${url}/posts/notifications/delete/${user._id}`,
-      {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
+  const deleteNotification = async () => {
+    try {
+      const response = await fetch(
+        `${url}/posts/notifications/delete/${user._id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to delete notification");
       }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to delete notification");
+      // Update the notifications state after successful deletion
+      setNotifications([]); // Clear notifications array after deletion
+    } catch (error) {
+      console.error("Error deleting notification:", error);
     }
-    // Update the notifications state after successful deletion
-    setNotifications([]); // Clear notifications array after deletion
-  } catch (error) {
-    console.error("Error deleting notification:", error);
-  }
-};
-
+  };
 
   // Check if popover is open
   const isPopoverOpen = Boolean(anchorEl);
@@ -150,7 +149,7 @@ const deleteNotification = async () => {
             },
           }}
         >
-          Sociopedia
+          FuzeFlow
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween

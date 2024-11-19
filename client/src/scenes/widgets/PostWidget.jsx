@@ -34,9 +34,10 @@ const PostWidget = ({
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+    const response = await fetch(`${API_BASE_URL}/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -49,13 +50,13 @@ const PostWidget = ({
   };
 
   const addComment = async () => {
-    const res = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
+    const res = await fetch(`${API_BASE_URL}/users/${loggedInUserId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
     const response = await fetch(
-      `http://localhost:3001/posts/${postId}/comment`,
+      `${API_BASE_URL}/posts/${postId}/comment`,
       {
         method: "POST",
         headers: {
@@ -91,7 +92,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`http://localhost:3001/assets/${picturePath}`}
+          src={`${API_BASE_URL}/assets/${picturePath}`}
         />
       )}
       <FlexBetween mt="0.25rem">
